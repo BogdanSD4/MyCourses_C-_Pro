@@ -13,6 +13,7 @@ namespace Lessons
     {
         public void Open()
         {
+            ILesson.Hello();
             ConvertMeterToCentimeter();
             FindCircleSquare();
             FindHypotenuse();
@@ -22,6 +23,7 @@ namespace Lessons
             AgeCalculation();
             CalculationExample();
             CalculateSquareAndVolume();
+            ILesson.ReadLine();
         }
 
         private static void CalculateSquareAndVolume()

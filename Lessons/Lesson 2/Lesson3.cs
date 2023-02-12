@@ -27,6 +27,7 @@ namespace Lessons
             PremiumCounter();
             MathOperationsResultConvertToByte();
             FindCircleRadiusAndSquare();
+            ILesson.ReadLine();
         }
 
         private void MoreLess()
