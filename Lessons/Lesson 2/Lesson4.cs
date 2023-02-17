@@ -10,7 +10,6 @@ namespace Lessons
     {
         public void Open()
         {
-            ILesson.Hello();
             TestCycle();
             MultiplicationTable();
             DivideResult();
@@ -24,7 +23,7 @@ namespace Lessons
             Algoritm();
             TernaryOperation();
             AngleName();
-            ILesson.ReadLine();
+            ILesson.UserRequest();
         }
 
         private void TestCycle()

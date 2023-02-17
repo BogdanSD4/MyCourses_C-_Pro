@@ -13,8 +13,6 @@ namespace Lessons
     {
         public void Open()
         {
-            ILesson.Hello();
-            HelloUser();
             MoreLess();
             DiscountCounter();
             FindQuarterOfAnHour();
@@ -27,7 +25,7 @@ namespace Lessons
             PremiumCounter();
             MathOperationsResultConvertToByte();
             FindCircleRadiusAndSquare();
-            ILesson.ReadLine();
+            ILesson.UserRequest();
         }
 
         private void MoreLess()
@@ -409,31 +407,6 @@ namespace Lessons
                     $"\nSquare = {square}";
 
                 Console.WriteLine(result);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Invalid value");
-                FindCircleRadiusAndSquare();
-            }
-        }
-        private void HelloUser()
-        {
-            try
-            {
-                Console.Write("First name: ");
-                string firstName = Console.ReadLine();
-                Console.Write("Last name: ");
-                string lastName = Console.ReadLine();
-
-                Console.WriteLine($"Hello {firstName} {lastName}");
-                Console.WriteLine(@"Hello {0} {1}", firstName, lastName);
-                Console.WriteLine(string.Concat("Hello ", firstName, " "+lastName));
-
-                if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/userName"))
-                {
-                    File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/userName"
-                        , firstName + " " + lastName);
-                }
             }
             catch (Exception)
             {
