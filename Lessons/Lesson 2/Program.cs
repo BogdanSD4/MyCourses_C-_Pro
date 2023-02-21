@@ -1,6 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reflection;
+﻿global using Extensions.Mine; 
+using System;
 
 namespace Lessons
 {

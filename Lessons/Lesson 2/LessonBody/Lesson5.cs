@@ -175,7 +175,7 @@ namespace Lessons
         }
         private void UserAge()
         {
-            string date = ILesson.Write("Enter date of your birthday (Format DD.MM.YY): ", (ref string res) => 
+            string date = ILesson.Read("Enter date of your birthday (Format DD.MM.YY): ", (ref string res) => 
             {
                 try
                 {
@@ -193,14 +193,14 @@ namespace Lessons
         }
         private void Calculator()
         {
-            int arg1 = ILesson.Write<int>("Argument 1: ");
-            char sign = ILesson.Write<char>("Sign: ", (ref string res) => 
+            int arg1 = ILesson.Read<int>("Argument 1: ");
+            char sign = ILesson.Read<char>("Sign: ", (ref string res) => 
             {
                 char[] signs = new char[] { '-', '+', '/', '*'};
                 if (!signs.Contains(res[0])) return false;
                 else return true;
             });
-            int arg2 = ILesson.Write<int>("Argument 2: ");
+            int arg2 = ILesson.Read<int>("Argument 2: ");
 
             switch (sign)
             {
@@ -240,8 +240,8 @@ namespace Lessons
         private void Convertation()
         {
             Console.WriteLine("Convert UAN to USD");
-            float rate = ILesson.Write<float>("Exchange rate: ", (ref string res) => { return res.Contains('-') ? false : true; });
-            float cash = ILesson.Write<float>("Cash in UAN: ", (ref string res) => { return res.Contains('-') ? false : true; });
+            float rate = ILesson.Read<float>("Exchange rate: ", (ref string res) => { return res.Contains('-') ? false : true; });
+            float cash = ILesson.Read<float>("Cash in UAN: ", (ref string res) => { return res.Contains('-') ? false : true; });
 
             Console.WriteLine("Result: " + (cash / rate) + " USD");
         }
@@ -255,7 +255,7 @@ namespace Lessons
                 int num = 0;
                 try
                 {
-                    num = int.Parse(ILesson.Write($"Argumetrt {i + 1}: ", (ref string res) =>
+                    num = int.Parse(ILesson.Read($"Argumetrt {i + 1}: ", (ref string res) =>
                     {
                         if (res == "exit")
                         {
@@ -296,8 +296,8 @@ namespace Lessons
         }
         private void FindAreaAndPerimeter()
         {
-            float side1 = ILesson.Write<float>("Enter side1: ", (ref string res) => { return res.Contains('-') ? false : true; });
-            float side2 = ILesson.Write<float>("Enter side2: ", (ref string res) => { return res.Contains('-') ? false : true; });
+            float side1 = ILesson.Read<float>("Enter side1: ", (ref string res) => { return res.Contains('-') ? false : true; });
+            float side2 = ILesson.Read<float>("Enter side2: ", (ref string res) => { return res.Contains('-') ? false : true; });
 
             float perimeter = side1 * 2 + side2 * 2;
             float area = side1 * side2;
@@ -306,7 +306,7 @@ namespace Lessons
         }
         private void RecursionCicle()
         {
-            int N = ILesson.Write<int>("Enter repeat amount: ", (ref string res) => { return res.Contains('-') ? false : true; });
+            int N = ILesson.Read<int>("Enter repeat amount: ", (ref string res) => { return res.Contains('-') ? false : true; });
             int num = 0;
 
             Recursion();
@@ -322,7 +322,7 @@ namespace Lessons
         }
         private void RecursionCicleSum()
         {
-            int N = ILesson.Write<int>("Enter value: ", (ref string res) => { return res.Contains('-') ? false : true; });
+            int N = ILesson.Read<int>("Enter value: ", (ref string res) => { return res.Contains('-') ? false : true; });
             int num = 0;
 
             Recursion(1);
@@ -338,7 +338,7 @@ namespace Lessons
         }
         private void NumberRate()
         {
-            int N = Math.Abs(ILesson.Write<int>("Enter value: "));
+            int N = Math.Abs(ILesson.Read<int>("Enter value: "));
             Console.WriteLine("Rate: "+N.ToString().Length);
         }
     }

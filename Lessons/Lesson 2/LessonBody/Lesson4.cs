@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lessons
 {
-    class Lesson4 : ILesson
+    partial class Lesson4 : ILesson
     {
         public void Open()
         {
@@ -52,7 +52,7 @@ namespace Lessons
 
             int num = 31;
             int line = 0;
-            Lesson4_Instruments.FillSpaceArray(num);
+            Lesson_Instruments.FillSpaceArray(num);
 
             for (int i = 0; i < num; i++)
             {
@@ -60,18 +60,18 @@ namespace Lessons
                 
                 if(line == 0)
                 {
-                    Console.Write(Lesson4_Instruments.GetSpace(i, i) + i + "  ");
+                    Console.Write(Lesson_Instruments.GetSpace(i, i) + i + "  ");
                     if (i == num - 1)
                     {
                         line++;
                         i = 0;
                         Console.Write("\n");
-                        Console.Write(Lesson4_Instruments.GetSpace(i, line) + line + "  ");
+                        Console.Write(Lesson_Instruments.GetSpace(i, line) + line + "  ");
                     }
                 }
                 else if(i != 0)
                 {
-                    Console.Write(Lesson4_Instruments.GetSpace(i, i * line)+ i * line + "  ");
+                    Console.Write(Lesson_Instruments.GetSpace(i, i * line)+ i * line + "  ");
                     if (i == num - 1)
                     {
                         line++;
@@ -79,7 +79,7 @@ namespace Lessons
                         if (line != num)
                         {
                             Console.Write("\n");
-                            Console.Write(Lesson4_Instruments.GetSpace(i, line) + line + "  ");
+                            Console.Write(Lesson_Instruments.GetSpace(i, line) + line + "  ");
                         }
                         else Console.WriteLine();
                     }
@@ -479,44 +479,6 @@ namespace Lessons
             {
                 Console.WriteLine("Invalid value");
                 AngleName();
-            }
-        }
-
-        class Lesson4_Instruments
-        {
-            static int[] space = new int[] { };
-
-            public static void FillSpaceArray(int value) 
-            {
-                space = new int[value];
-
-                for (int i = 0; i < space.Length; i++)
-                {
-                    if (i == 0)
-                    {
-                        space[i] = ((value) * 1).ToString().Length;
-                    }
-                    else
-                    {
-                        space[i] = ((value) * i).ToString().Length;
-                    }
-                }
-            }
-            public static string GetSpace(int index, int value)
-            {
-                if (index > space.Length) return "";
-                
-                string result = "";
-                int size = space[index] - value.ToString().Length;
-
-                if (size >= 0)
-                {
-                    for (int j = 0; j < size; j++)
-                    {
-                        result += " ";
-                    }
-                }
-                return result;
             }
         }
     }

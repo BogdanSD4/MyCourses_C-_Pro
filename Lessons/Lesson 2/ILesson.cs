@@ -1,19 +1,18 @@
-﻿using System.IO;
+﻿
+using System.IO;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Linq;
+
 
 namespace Lessons
 {
     public interface ILesson
     {
         public static int lesson = 5;
+        public delegate bool ActionEvent<T>(ref T text);
         public abstract void Open();
-        public static bool TT(string a)
-        {
-            return false;
-        }
         public static void Hello()
         {
             UserInfo info = new UserInfo();
@@ -27,9 +26,9 @@ namespace Lessons
             {
                 Console.WriteLine("Registration:");
 
-                info.firstName = Write("First name: ");
-                info.lastName = Write("Last name: ");
-                info.password = Write<int>("Password(4 - 16): ", (ref string res) =>
+                info.firstName = Read("First name: ");
+                info.lastName = Read("Last name: ");
+                info.password = Read<int>("Password(4 - 16): ", (ref string res) =>
                 {
                     char[] numbers = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
@@ -62,34 +61,42 @@ namespace Lessons
 
             void LessonNumRequest()
             {
-                Console.Write($"Input lesson number or \"Y\" to open current: ");
+                Console.Write($"Open current lesson press - \"Y\"\n" +
+                    $"Choose specific press - \"Enter\": ");
+                var key = Console.ReadKey().Key;
+                if (key == ConsoleKey.Y)
+                {
+                    Console.WriteLine();
+                    return;
+                }
+
+                Console.Write("\nInput lesson number: ");
                 string number = Console.ReadLine();
 
-                if (number == "Y") return;
-                else
+                try
                 {
-                    try
-                    {
-                        int numInt = int.Parse(number);
-                        if (Type.GetType($"Lessons.Lesson{numInt}") == null)
-                        {
-                            Console.WriteLine("Invalid number");
-                            LessonNumRequest();
-                        }
-                        else
-                        {
-                            lesson = info.currentLesson = numInt;
-                        }
-                    }
-                    catch (Exception)
+                    int numInt = int.Parse(number);
+                    if (Type.GetType($"Lessons.Lesson{numInt}") == null)
                     {
                         Console.WriteLine("Invalid number");
                         LessonNumRequest();
                     }
+                    else
+                    {
+                        lesson = info.currentLesson = numInt;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Invalid number");
+                    LessonNumRequest();
                 }
             }
         }
 
+        /// <summary>
+        /// Show command list
+        /// </summary>
         public static void UserRequest()
         {
             Console.WriteLine($"Command list:" +
@@ -134,9 +141,8 @@ namespace Lessons
                 Console.Write("This lesson doesn't exist");
                 ChooseLesson();
             }
-        }
-        public delegate bool ActionEvent<T>(ref T text);
-        public static string Write(string text, ActionEvent<string> paremeters = null)
+        }    
+        public static string Read(string text, ActionEvent<string> paremeters = null)
         {
             string result;
             bool exit;
@@ -164,7 +170,7 @@ namespace Lessons
                 result = Console.ReadLine();
             }
         }
-        public static T Write<T>(string text, ActionEvent<string> paremeters = null)
+        public static T Read<T>(string text, ActionEvent<string> paremeters = null)
         {
             var result = Activator.CreateInstance<T>();
             string res;
@@ -210,6 +216,35 @@ namespace Lessons
             {
                 Console.Write(text);
                 res = Console.ReadLine();
+            }
+        }
+
+        public static string ReadKey(string text, ActionEvent<ConsoleKey> paremeters = null)
+        {
+            ConsoleKey result;
+            bool exit;
+            do
+            {
+                Request();
+
+                if (paremeters != null)
+                {
+                    exit = paremeters.Invoke(ref result);
+                    if (!exit) Console.WriteLine("\nInvalid value");
+                }
+                else
+                {
+                    exit = true;
+                }
+            }
+            while (!exit);
+
+            return result.ToString();
+
+            void Request()
+            {
+                Console.Write(text);
+                result = Console.ReadKey().Key;
             }
         }
     }
