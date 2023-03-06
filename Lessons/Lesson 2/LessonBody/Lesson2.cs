@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lessons
+namespace Lessons.LessonBody
 {
     class Lesson2 : ILesson
     {

@@ -45,5 +45,37 @@ namespace Lessons
 
             return File.Exists(path);
         }
+
+        private void FileReader()
+        {
+            string path = "D:\\Fork\\MyCourses_C-_Pro\\Lessons\\Lesson 2\\Names.txt";
+            StreamReader stringReader = new StreamReader(path);
+            string result = "";
+            int repeat = 0;
+            while (!stringReader.EndOfStream)
+            {
+                string line = stringReader.ReadLine();
+                if (repeat-- == 0)
+                {
+                    string name = "";
+
+                    for (int i = 0; i < line.Length; i++)
+                    {
+                        if (line[i] == ' ' || i == line.Length - 1)
+                        {
+                            result += $"\"{name}\",";
+
+                            break;
+                        }
+
+                        name += line[i];
+                    }
+
+                    if (repeat <= 0) repeat = 5;
+                }
+            }
+
+            Console.WriteLine(result);
+        }
     }
 }

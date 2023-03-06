@@ -6,5 +6,9 @@
     <RootNamespace>Lessons</RootNamespace>
 	<LangVersion>preview</LangVersion>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <None Remove="LessonBody\Lesson8.cs~RF11bf1b2.TMP" />
+  </ItemGroup>
 
 </Project>

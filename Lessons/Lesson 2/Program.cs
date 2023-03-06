@@ -10,7 +10,7 @@ namespace Lessons
             StartSettings();
             ILesson.Hello();
 
-            Type type = Type.GetType($"Lessons.Lesson{ILesson.lesson}");
+            Type type = Type.GetType($"Lessons.LessonBody.Lesson{ILesson.lesson}");
             object obj = Activator.CreateInstance(type);
 
             ILesson currentLesson = (ILesson)obj;

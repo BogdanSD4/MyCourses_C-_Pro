@@ -62,7 +62,7 @@ namespace Lessons
             void LessonNumRequest()
             {
                 Console.Write($"Open current lesson press - \"Y\"\n" +
-                    $"Choose specific press - \"Enter\": ");
+                    $"Choose specific press - \"Enter\"");
                 var key = Console.ReadKey().Key;
                 if (key == ConsoleKey.Y)
                 {
@@ -76,7 +76,7 @@ namespace Lessons
                 try
                 {
                     int numInt = int.Parse(number);
-                    if (Type.GetType($"Lessons.Lesson{numInt}") == null)
+                    if (Type.GetType($"Lessons.LessonBody.Lesson{numInt}") == null)
                     {
                         Console.WriteLine("Invalid number");
                         LessonNumRequest();
@@ -179,33 +179,20 @@ namespace Lessons
             {
                 Request();
 
+                try
+                {
+                    result = (T)Convert.ChangeType(res, result.GetType());
+                    exit = true;
+                }
+                catch (Exception)
+                {
+                    exit = false;
+                }
+
                 if (paremeters != null)
                 {
                     exit = paremeters.Invoke(ref res);
                     if(!exit) Console.WriteLine("Invalid value");
-                    else
-                    {
-                        try
-                        {
-                            result = (T)Convert.ChangeType(res, result.GetType());
-                        }
-                        catch (Exception)
-                        {
-                            exit = false;
-                        }
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        result = (T)Convert.ChangeType(res, result.GetType());
-                        exit = true;
-                    }
-                    catch (Exception)
-                    {
-                        exit = false;
-                    }
                 }
             }
             while (!exit);
@@ -219,7 +206,7 @@ namespace Lessons
             }
         }
 
-        public static string ReadKey(string text, ActionEvent<ConsoleKey> paremeters = null)
+        public static string ReadKey(string text, ActionEvent<ConsoleKey> paremeters = null, bool printKey = false, bool showError = true, int pointerX = -1, int pointerY = -1)
         {
             ConsoleKey result;
             bool exit;
@@ -230,7 +217,7 @@ namespace Lessons
                 if (paremeters != null)
                 {
                     exit = paremeters.Invoke(ref result);
-                    if (!exit) Console.WriteLine("\nInvalid value");
+                    if (!exit && showError) Console.WriteLine("\nInvalid value");
                 }
                 else
                 {
@@ -239,12 +226,19 @@ namespace Lessons
             }
             while (!exit);
 
+            Console.WriteLine();
             return result.ToString();
 
             void Request()
             {
+                if(pointerX != -1 && pointerY != -1)
+                {
+                    int x = pointerX == -1 ? 0 : pointerX;
+                    int y = pointerY == -1 ? 0 : pointerY;
+                    Console.SetCursorPosition(x, y);
+                }
                 Console.Write(text);
-                result = Console.ReadKey().Key;
+                result = Console.ReadKey(printKey).Key;
             }
         }
     }

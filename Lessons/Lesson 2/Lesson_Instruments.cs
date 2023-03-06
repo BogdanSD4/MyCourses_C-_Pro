@@ -1,4 +1,6 @@
-﻿namespace Lessons
+﻿using System;
+
+namespace Lessons
 {
     class Lesson_Instruments
     {
@@ -35,6 +37,26 @@
                 }
             }
             return result;
+        }
+
+        public static string CreateVerticalList(params (string, object)[] obj)
+        {
+            string result = "";
+            for (int i = 0; i < obj.Length; i++)
+            {
+                result += obj[i].Item1 + obj[i].Item2 + "\n";
+            }
+            return result;
+        }
+
+        public static void Clear(int startLine, int lineCount)
+        {
+            string clearH = "                                                           ";
+            for (int i = 0; i < lineCount; i++)
+            {
+                Console.SetCursorPosition(0, startLine + i);
+                Console.Write(clearH);
+            }
         }
     }
 }
