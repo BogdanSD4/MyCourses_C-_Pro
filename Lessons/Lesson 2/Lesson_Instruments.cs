@@ -5,7 +5,7 @@ namespace Lessons
     class Lesson_Instruments
     {
         static int[] space = new int[] { };
-
+        public static string emptyString = "                                                    ";
         public static void FillSpaceArray(int value) 
         {
             space = new int[value];
