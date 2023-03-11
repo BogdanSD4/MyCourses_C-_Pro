@@ -26,5 +26,14 @@ namespace Extensions.Mine
             }
             return result;
         }
+
+        public static bool Contains(this char[] arr, char sym)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] == sym) return true;
+            }
+            return false;
+        }
     }
 }

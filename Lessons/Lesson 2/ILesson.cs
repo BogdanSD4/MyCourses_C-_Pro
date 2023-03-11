@@ -170,30 +170,51 @@ namespace Lessons
                 result = Console.ReadLine();
             }
         }
-        public static T Read<T>(string text, ActionEvent<string> paremeters = null)
+        public static T Read<T>(string text, ActionEvent<string> paremeters = null, bool inline = false, bool typeCheck = true)
         {
+            int x = Console.CursorLeft;
+            int y = Console.CursorTop;
+
             var result = Activator.CreateInstance<T>();
             string res;
             bool exit;
+
             do
             {
+                if (inline)
+                {
+                    Console.SetCursorPosition(x, y);
+                }
+
                 Request();
 
                 try
                 {
-                    result = (T)Convert.ChangeType(res, result.GetType());
+                    if(typeCheck) result = (T)Convert.ChangeType(res, result.GetType());
                     exit = true;
                 }
                 catch (Exception)
                 {
                     exit = false;
+                    continue;
                 }
 
                 if (paremeters != null)
                 {
                     exit = paremeters.Invoke(ref res);
-                    if(!exit) Console.WriteLine("Invalid value");
-                }
+                    if (!typeCheck)
+                    {
+                        try
+                        {
+                            result = (T)Convert.ChangeType(res, result.GetType());
+                        }
+                        catch (Exception)
+                        {
+                            exit = false;
+                        }
+                    }
+                    if (!exit && !inline) Console.WriteLine("Invalid value");
+                }  
             }
             while (!exit);
 
@@ -201,15 +222,28 @@ namespace Lessons
 
             void Request()
             {
-                Console.Write(text);
-                res = Console.ReadLine();
+                if (inline)
+                {
+                    int coursorX = x + text.Length; 
+                    Console.Write(text + Lesson_Instruments.emptyString);
+                    Console.SetCursorPosition(coursorX, y);
+                    res = Console.ReadLine();
+                }
+                else
+                {
+                    Console.Write(text);
+                    res = Console.ReadLine();
+                }
             }
         }
 
-        public static string ReadKey(string text, ActionEvent<ConsoleKey> paremeters = null, bool printKey = false, bool showError = true, int pointerX = -1, int pointerY = -1)
+        public static string ReadKey(string text, ActionEvent<ConsoleKey> paremeters = null, bool printKey = false, bool showError = true, int pointerX = default, int pointerY = default)
         {
             ConsoleKey result;
             bool exit;
+            if (pointerX == default) pointerX = Console.CursorLeft;
+            if (pointerY == default) pointerY = Console.CursorTop;
+
             do
             {
                 Request();
@@ -231,14 +265,9 @@ namespace Lessons
 
             void Request()
             {
-                if(pointerX != -1 && pointerY != -1)
-                {
-                    int x = pointerX == -1 ? 0 : pointerX;
-                    int y = pointerY == -1 ? 0 : pointerY;
-                    Console.SetCursorPosition(x, y);
-                }
+                Console.SetCursorPosition(pointerX, pointerY);
                 Console.Write(text);
-                result = Console.ReadKey(printKey).Key;
+                result = Console.ReadKey(!printKey).Key;
             }
         }
     }

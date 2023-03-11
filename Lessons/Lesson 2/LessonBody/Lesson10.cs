@@ -295,7 +295,7 @@ namespace Lessons.LessonBody
                 points.Add(point);
             }
 
-            InlineWriter(Console.CursorLeft, Console.CursorTop, arrInfo);
+            Lesson_Instruments.InlineWriter(text: arrInfo);
 
             Console.WriteLine("\n> Operator \"+\":");
             Point[] pointsCopy = new Point[points.Count];
@@ -342,7 +342,7 @@ namespace Lessons.LessonBody
             {
                 arrInfo[i] = pointsCopy[i]++.ToString();
             }
-            InlineWriter(Console.CursorLeft, Console.CursorTop, arrInfo);
+            Lesson_Instruments.InlineWriter(text: arrInfo);
 
             Console.WriteLine("\n> Operator \"--\":");
             points.CopyTo(pointsCopy);
@@ -352,48 +352,7 @@ namespace Lessons.LessonBody
             {
                 arrInfo[i] = pointsCopy[i]--.ToString();
             }
-            InlineWriter(Console.CursorLeft, Console.CursorTop, arrInfo);
-
-            void InlineWriter(int startX, int startY, params string[] text)
-            {
-                int maxLength = 0;
-
-                for (int i = 0; i < text.Length; i++)
-                {
-                    
-                    string res = "";
-                    int indexY = startY;
-
-                    for (int j = 0; j < text[i].Length; j++)
-                    {
-                        if (text[i][j] == '\n' || j == text[i].Length - 1)
-                        {
-                            if(j == text[i].Length - 1) res += text[i][j];
-                            Console.SetCursorPosition(startX + maxLength, indexY);
-                            Console.WriteLine(res);
-                            res = "";
-                            indexY++;
-                            continue;
-                        }
-                        res += text[i][j];
-                    }
-
-                    maxLength += Task.Run<int>(() => 
-                    {
-                        int num = 0;
-                        for (int j = 0; j < text[i].Length; j++)
-                        {
-                            if(text[i][j] == '\n')
-                            {
-                                num = 0;
-                                continue;
-                            }
-                            num++;
-                        }
-                        return num;
-                    }).Result;
-                }
-            }
+            Lesson_Instruments.InlineWriter(text: arrInfo);
         }
     }
 }
