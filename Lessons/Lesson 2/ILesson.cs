@@ -99,9 +99,11 @@ namespace Lessons
         /// </summary>
         public static void UserRequest()
         {
-            Console.WriteLine($"Command list:" +
+            Console.WriteLine($"\nCommand list:" +
                 $"\nchoose - choose spacific lesson" +
                 $"\nexit - out of program");
+            Console.Write("\n> ");
+
             var text = Console.ReadLine();
 
             switch (text)

@@ -7,6 +7,7 @@ namespace Lessons
     {
         static int[] space = new int[] { };
         public static string emptyString = "                                                    ";
+        public static string alphabet = "abcdefghijklmnopqrstuvwxyz";
         public static string someText 
         { 
             get 
@@ -56,14 +57,19 @@ namespace Lessons
             return result;
         }
 
-        public static void Clear(int startLine, int lineCount)
+        public static void Clear(int lineCount, int startLine = default)
         {
+            if(startLine == default)
+            {
+                startLine = Console.CursorTop;
+            }
             string clearH = "                                                           ";
             for (int i = 0; i < lineCount; i++)
             {
                 Console.SetCursorPosition(0, startLine + i);
                 Console.Write(clearH);
             }
+            Console.SetCursorPosition(0, startLine);
         }
 
         /// <summary>
@@ -90,7 +96,149 @@ namespace Lessons
             return result;
         }
 
-        public static void InlineWriter(int startX = default, int startY = default, int space = default, params string[] text)
+        public static void InlineWriter(int space = default, params string[] text)
+        {
+            int maxLength = 0;
+
+            int row = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                int newLine = 0;
+                for (int j = 0; j < text[i].Length; j++)
+                {
+                    if (text[i][j] == '\n') newLine++;
+                }
+                if (newLine > row) row = newLine;
+            }
+            row += 2;
+
+            int startX = Console.CursorLeft;
+            int startY = Console.CursorTop;
+
+            int lineY = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                string res = "";
+                int indexY = startY + lineY;
+
+                for (int j = 0; j < text[i].Length; j++)
+                {
+                    if (text[i][j] == '\n' || j == text[i].Length - 1)
+                    {
+                        if (j == text[i].Length - 1) res += text[i][j];
+
+                        Console.SetCursorPosition(startX + maxLength, indexY);
+                        Console.WriteLine(res);
+                        res = "";
+                        indexY++;
+                        continue;
+                    }
+                    res += text[i][j];
+                }
+
+                int newLeng = Task.Run<int>(() =>
+                {
+                    int result = 0;
+                    int num = 0;
+                    for (int j = 0; j < text[i].Length; j++)
+                    {
+                        if (text[i][j] == '\n' || j == text[i].Length - 1)
+                        {
+                            if (num > result) result = num;
+                            num = 0;
+                            continue;
+                        }
+                        num++;
+                    }
+                    return result + space;
+                }).Result;
+
+                if (startX + maxLength + (newLeng * 2) > Console.BufferWidth)
+                {
+                    lineY += row;
+                    maxLength = 0;
+                }
+                else
+                {
+                    maxLength += newLeng;
+                }
+            }
+        }
+        public static void InlineWriter(Type exception, int space = default, params string[] text)
+        {
+            int maxLength = 0;
+
+            int row = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                int newLine = 0;
+                for (int j = 0; j < text[i].Length; j++)
+                {
+                    if (text[i][j] == '\n') newLine++;
+                }
+                if (newLine > row) row = newLine;
+            }
+            row += 2;
+
+            int startX = Console.CursorLeft;
+            int startY = Console.CursorTop;
+
+            int lineY = 0;
+            for (int i = 0; i < text.Length; i++)
+            {
+                string res = "";
+                int indexY = startY + lineY;
+
+                for (int j = 0; j < text[i].Length; j++)
+                {
+                    if (text[i][j] == '\n' || j == text[i].Length - 1)
+                    {
+                        if (j == text[i].Length - 1) res += text[i][j];
+
+                        Console.SetCursorPosition(startX + maxLength, indexY);
+                        Console.WriteLine(res);
+                        res = "";
+                        indexY++;
+                        continue;
+                    }
+                    res += text[i][j];
+                }
+
+                if (exception.IsSubclassOf(typeof(Exception)))
+                {
+                    Console.SetCursorPosition(startX + maxLength, indexY);
+                    Activator.CreateInstance(exception);
+                }
+
+                int newLeng = Task.Run<int>(() =>
+                {
+                    int result = 0;
+                    int num = 0;
+                    for (int j = 0; j < text[i].Length; j++)
+                    {
+                        if (text[i][j] == '\n' || j == text[i].Length - 1)
+                        {
+                            if (num > result) result = num;
+                            num = 0;
+                            continue;
+                        }
+                        num++;
+                    }
+                    return result + space;
+                }).Result;
+
+                if (startX + maxLength + (newLeng * 2) > Console.BufferWidth)
+                {
+                    lineY += row;
+                    maxLength = 0;
+                }
+                else
+                {
+                    maxLength += newLeng;
+                }
+            }
+        }
+        public static void InlineWriter(int startX, int startY, int space = default, params string[] text)
         {
             int maxLength = 0;
 
@@ -136,7 +284,7 @@ namespace Lessons
                     int num = 0;
                     for (int j = 0; j < text[i].Length; j++)
                     {
-                        if (text[i][j] == '\n')
+                        if (text[i][j] == '\n' || j == text[i].Length - 1)
                         {
                             if (num > result) result = num;
                             num = 0;
