@@ -11,7 +11,6 @@ namespace Lessons.LessonBody
         public void Open()
         {
             LessonClassRealisation();
-            ILesson.UserRequest();
         }
 
         public void LessonClassRealisation()

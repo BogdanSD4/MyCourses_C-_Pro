@@ -1,0 +1,1 @@
+[{"Id":1,"Product":"Tomato","Price":45.0,"Discount":2.0,"PriceWithDiscount":44.10,"QuantityOfProduct":456},{"Id":2,"Product":"Burger","Price":153.45,"Discount":15.0,"PriceWithDiscount":130.4325,"QuantityOfProduct":180},{"Id":3,"Product":"Pizza","Price":123.6,"Discount":8.0,"PriceWithDiscount":113.712,"QuantityOfProduct":123}]

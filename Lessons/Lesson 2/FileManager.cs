@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -76,6 +77,19 @@ namespace Lessons
             }
 
             Console.WriteLine(result);
+        }
+
+        public static string PathToRootDir()
+        {
+            var projectName = Process.GetCurrentProcess().ProcessName;
+            var filePath = Directory.GetParent(Directory.GetCurrentDirectory());
+
+            while (filePath.Name != projectName)
+            {
+                filePath = filePath.Parent;
+            }
+
+            return filePath + "\\AgeCalculation\\bin\\Debug\\";
         }
     }
 }

@@ -16,9 +16,7 @@ namespace Lessons.LessonBody
             ShowMagazines();
             Recorder();
             Documentation();
-            ActionsWithDocument();
-            ILesson.UserRequest();
-        }
+            ActionsWithDocument();        }
 
         private void ShowMagazines()
         {

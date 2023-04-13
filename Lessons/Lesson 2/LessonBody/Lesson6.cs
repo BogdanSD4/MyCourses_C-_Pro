@@ -19,7 +19,6 @@ namespace Lessons.LessonBody
             CutArray();
             IncreaseArraySize();
             ArrayTable();
-            ILesson.UserRequest();
         }
 
         private void CreateAndPrintArray()

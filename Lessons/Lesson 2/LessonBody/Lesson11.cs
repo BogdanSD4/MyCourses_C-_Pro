@@ -19,7 +19,6 @@ namespace Lessons.LessonBody
             ClassAndStructDifference();
             ColorText();
             OfficeWorkers();
-            ILesson.UserRequest();
         }
 
         private void Writer()

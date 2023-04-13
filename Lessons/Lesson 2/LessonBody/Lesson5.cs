@@ -19,7 +19,6 @@ namespace Lessons.LessonBody
             RecursionCicle();
             RecursionCicleSum();
             NumberRate();
-            ILesson.UserRequest();
         }
 
         private void MiddleValue()

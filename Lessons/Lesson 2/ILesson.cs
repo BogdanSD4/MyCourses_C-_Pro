@@ -122,27 +122,24 @@ namespace Lessons
 
         private static void ChooseLesson()
         {
-            Console.Write("Input lesson number: ");
-            var num = int.Parse(Console.ReadLine());
-
-            try
+            Type type = null;
+            int lessonNumber = (int)Read<uint>("Input lesson number: ", (ref string res) => 
             {
-                Type type = Type.GetType($"Lessons.Lesson{num}");
-                object obj = Activator.CreateInstance(type);
+                int num = int.Parse(res);
+                if ((type = Type.GetType($"Lessons.LessonBody.Lesson{num}")) == null) return false;
+                return true;
+            }, true);
 
-                var data = FileManager.GetData<UserInfo>("userInfo");
-                ILesson currentLesson = (ILesson)obj;
-                lesson = data.currentLesson = num;
-                FileManager.SaveData(data, "userInfo");
+            object obj = Activator.CreateInstance(type);
 
-                Console.Clear();
-                currentLesson.Open();
-            }
-            catch (Exception)
-            {
-                Console.Write("This lesson doesn't exist");
-                ChooseLesson();
-            }
+            var data = FileManager.GetData<UserInfo>("userInfo");
+            ILesson currentLesson = (ILesson)obj;
+            lesson = data.currentLesson = lessonNumber;
+            FileManager.SaveData(data, "userInfo");
+
+            Console.Clear();
+            currentLesson.Open();
+            UserRequest();
         }    
         public static string Read(string text, ActionEvent<string> paremeters = null)
         {

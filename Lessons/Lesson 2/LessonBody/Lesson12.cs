@@ -15,7 +15,6 @@ namespace Lessons.LessonBody
             AnotherCalculator();
             WorkerReviews();
             FoodMarket();
-            ILesson.UserRequest();
         }
 
         private void AnotherCalculator()

@@ -23,7 +23,6 @@ namespace Lessons.LessonBody
             Algoritm();
             TernaryOperation();
             AngleName();
-            ILesson.UserRequest();
         }
 
         private void TestCycle()

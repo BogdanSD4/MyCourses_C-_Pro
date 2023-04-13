@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33130.400
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lessons", "Lesson 2\Lessons.csproj", "{0333C2E7-CECF-4B22-B19D-1E6FAB1A3D32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgeCalculation", "AgeCalculation\AgeCalculation.csproj", "{06F322F5-F67C-4990-B8C8-6F8AD42B6C12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFAplication", "AgeCalculation\WPFAplication.csproj", "{06F322F5-F67C-4990-B8C8-6F8AD42B6C12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LessonEntity", "LessonEntity\LessonEntity.csproj", "{F24495F0-95BB-417F-8149-85B84587509A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{06F322F5-F67C-4990-B8C8-6F8AD42B6C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06F322F5-F67C-4990-B8C8-6F8AD42B6C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06F322F5-F67C-4990-B8C8-6F8AD42B6C12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F24495F0-95BB-417F-8149-85B84587509A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24495F0-95BB-417F-8149-85B84587509A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24495F0-95BB-417F-8149-85B84587509A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24495F0-95BB-417F-8149-85B84587509A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,7 +17,6 @@ namespace Lessons.LessonBody
             ChestFilling();
             SomeClass();
             GropeOfPerson();
-            ILesson.UserRequest();
         }
 
         private void TailOfAnimal()

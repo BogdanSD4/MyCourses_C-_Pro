@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Lessons
@@ -46,7 +48,15 @@ namespace Lessons
             }
             return result;
         }
-
+        public static string GetSpace(int count)
+        {
+            string result = "";
+            for (int i = 0; i < count; i++)
+            {
+                result += ' ';
+            }
+            return result;
+        }
         public static string CreateVerticalList(params (string, object)[] obj)
         {
             string result = "";
@@ -63,7 +73,7 @@ namespace Lessons
             {
                 startLine = Console.CursorTop;
             }
-            string clearH = "                                                           ";
+            string clearH = new string(' ', Console.LargestWindowWidth);
             for (int i = 0; i < lineCount; i++)
             {
                 Console.SetCursorPosition(0, startLine + i);
@@ -305,6 +315,29 @@ namespace Lessons
                     maxLength += newLeng;
                 }
             }
+        }
+
+        public static Type GetRandomStructType()
+        {
+            string[] types = new string[]
+            { "System.Int32", "System.Decimal", "System.Double", "System.Single" };
+
+            Random random = new Random();
+            return Type.GetType(types[random.Next(0, types.Length)]);
+        }
+        public static void OpenWPF(string processName)
+        {
+            var rootPath = FileManager.PathToRootDir();
+
+            File.WriteAllText(rootPath + "Settings.txt", processName);
+
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "AgeCalculation.exe";
+            startInfo.WorkingDirectory = rootPath;
+            startInfo.UseShellExecute = true;
+            Process process = new Process();
+            process.StartInfo = startInfo;
+            process.Start();
         }
     }
 }

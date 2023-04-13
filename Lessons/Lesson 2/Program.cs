@@ -1,10 +1,16 @@
 ﻿global using Extensions.Mine; 
 using System;
+using System.Runtime.InteropServices;
 
 namespace Lessons
 {
     class Program
     {
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern IntPtr GetConsoleWindow();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
         static void Main(string[] args)
         {
             StartSettings();
@@ -15,12 +21,20 @@ namespace Lessons
 
             ILesson currentLesson = (ILesson)obj;
             currentLesson.Open();
+            ILesson.UserRequest();
+
             Console.ReadLine();
         }
 
         private static void StartSettings()
         {
-            
+            IntPtr consoleWindow = GetConsoleWindow();
+
+            int screenWidth = Console.LargestWindowWidth;
+            int screenHeight = Console.LargestWindowHeight;
+
+            SetWindowPos(consoleWindow, IntPtr.Zero, 0, 0, screenWidth / 2, screenHeight / 2, 0);
+
             try
             {
                 Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight * 10);
@@ -32,43 +46,10 @@ namespace Lessons
                 Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight * 10);
                 Console.SetWindowSize(Console.LargestWindowWidth - 10, Console.LargestWindowHeight - 10);
             }
-            
 
+            Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.Green;
             FileManager.SAVE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + FileManager.SAVE_PATH;
-        }
-
-        private static string Test(string task)
-        {
-            string result = "";
-            for (int i = 0; i < task.Length; i++)
-            {
-                switch (task[i])
-                {
-                    case '1' or '2' or '3' or '4' or '5' or '6' or '7' or '8' or '9':
-                        string res = task.Substring(i + 2);
-                        while(res[res.Length - 1] != ']')
-                        {
-                            res = res.Remove(res.Length - 1);
-                        }
-                        res = res.Remove(res.Length - 1);
-                        string sym = Test(res);
-                        int count = int.Parse($"{task[i]}");
-                        for (int j = 0; j < count; j++)
-                        {
-                            result += sym;
-                        }
-                        i += res.Length + 1;
-                        break;
-                    case '[' or ']':
-                        break;
-                    default: 
-                        result += task[i];
-                        break;
-                }
-                
-            }
-            return result;
         }
     }
 }

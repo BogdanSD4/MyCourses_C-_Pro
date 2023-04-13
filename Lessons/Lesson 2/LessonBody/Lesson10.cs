@@ -19,7 +19,6 @@ namespace Lessons.LessonBody
             StringCounter();
             ArraySort();
             Coordinates();
-            ILesson.UserRequest();
         }
 
         private void Calculate()

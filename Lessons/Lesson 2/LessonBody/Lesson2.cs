@@ -22,7 +22,6 @@ namespace Lessons.LessonBody
             AgeCalculation();
             CalculationExample();
             CalculateSquareAndVolume();
-            ILesson.UserRequest();
         }
 
         private static void CalculateSquareAndVolume()
@@ -62,16 +61,17 @@ namespace Lessons.LessonBody
         }
         private static void AgeCalculation()
         {
-            var projectName = Process.GetCurrentProcess().ProcessName;
-            var filePath = Directory.GetParent(Directory.GetCurrentDirectory());
+            var rootPath = FileManager.PathToRootDir();
 
-            while(filePath.Name != projectName)
-            {
-                filePath = filePath.Parent;
-            }
+            File.WriteAllText(rootPath + "Settings.txt", "calculator");
 
-            var path = filePath+"\\AgeCalculation\\bin\\Debug\\AgeCalculation.exe";
-            Process.Start(path);
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "AgeCalculation.exe";
+            startInfo.WorkingDirectory = rootPath;
+            startInfo.UseShellExecute = true;
+            Process process = new Process();
+            process.StartInfo = startInfo;
+            process.Start();
         }
         private static void FindSale()
         {
