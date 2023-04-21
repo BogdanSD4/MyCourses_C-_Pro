@@ -13,7 +13,22 @@ namespace Lessons
         public static string someText 
         { 
             get 
-            { return "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod nisi porta. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque. Blandit massa enim nec dui nunc mattis. Dignissim enim sit amet venenatis urna cursus eget. Sit amet massa vitae tortor condimentum. Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Tempor orci eu lobortis elementum. Adipiscing elit duis tristique sollicitudin nibh sit amet. Tellus at urna condimentum mattis pellentesque id nibh tortor id. Diam phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Leo vel fringilla est ullamcorper.Feugiat scelerisque varius morbi enim nunc. Arcu ac tortor dignissim convallis aenean et.Adipiscing elit duis tristique sollicitudin nibh sit amet commodo.Mauris sit amet massa vitae tortor condimentum.At ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget. Feugiat vivamus at augue eget arcu dictum varius duis at. Erat imperdiet sed euismod nisi porta lorem.Fames ac turpis egestas sed tempus urna et pharetra.Fringilla urna porttitor rhoncus dolor purus non enim praesent elementum. Nunc vel risus commodo viverra maecenas accumsan."; 
+            { return 
+@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+incididunt ut labore et dolore magna aliqua. Egestas erat imperdiet sed euismod 
+nisi porta. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque. 
+Blandit massa enim nec dui nunc mattis. Dignissim enim sit amet venenatis urna cursus eget. 
+Sit amet massa vitae tortor condimentum. Morbi enim nunc faucibus a pellentesque 
+sit amet porttitor eget. Tempor orci eu lobortis elementum. Adipiscing elit duis 
+tristique sollicitudin nibh sit amet. Tellus at urna condimentum mattis pellentesque 
+id nibh tortor id. Diam phasellus vestibulum lorem sed risus ultricies tristique 
+nulla aliquet. Leo vel fringilla est ullamcorper.Feugiat scelerisque varius morbi enim nunc. 
+Arcu ac tortor dignissim convallis aenean et.Adipiscing elit duis tristique sollicitudin 
+nibh sit amet commodo.Mauris sit amet massa vitae tortor condimentum.At ultrices 
+mi tempus imperdiet nulla malesuada pellentesque elit eget. Feugiat vivamus at augue 
+eget arcu dictum varius duis at. Erat imperdiet sed euismod nisi porta lorem.
+Fames ac turpis egestas sed tempus urna et pharetra.Fringilla urna porttitor rhoncus 
+dolor purus non enim praesent elementum. Nunc vel risus commodo viverra maecenas accumsan."; 
             }
         }
         public static void FillSpaceArray(int value) 
@@ -329,7 +344,7 @@ namespace Lessons
         {
             var rootPath = FileManager.PathToRootDir();
 
-            File.WriteAllText(rootPath + "Settings.txt", processName);
+            FileManager.SetXmlWinFormSettings(processName);
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "AgeCalculation.exe";

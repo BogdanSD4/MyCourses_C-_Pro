@@ -1,11 +1,12 @@
-﻿using System;
+﻿using AgeCalculation.Forms;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Xml;
 
 namespace AgeCalculation
 {
@@ -27,8 +28,14 @@ namespace AgeCalculation
                 filePath = filePath.Parent;
             }
 
-            var settings = File.ReadAllText(filePath.FullName + "\\bin\\Debug\\Settings.txt");
-            
+            string path = "D:\\Fork\\MyCourses_C-_Pro\\Lessons\\Lesson 2\\Files\\Settings.xml";
+            XmlDocument document = new XmlDocument();
+            document.Load(path);
+
+            var node = document.SelectSingleNode("//Name");
+            string settings = node.InnerText;
+
+
             switch (settings)
             {
                 case "calculator":
@@ -39,6 +46,12 @@ namespace AgeCalculation
                     break;
                 case "database":
                     form = new DB_Grid();
+                    break;
+                case "fileManager":
+                    form = new FileManager();
+                    break;
+                case "xmlForm":
+                    form = new XmlForm();
                     break;
             }
 

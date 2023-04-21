@@ -11,5 +11,13 @@
   <ItemGroup>
     <None Remove="LessonBody\Lesson8.cs~RF11bf1b2.TMP" />
   </ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="SoapFormatter" Version="1.1.9" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Folder Include="Files\XML_Lesson23\" />
+  </ItemGroup>
 
 </Project>

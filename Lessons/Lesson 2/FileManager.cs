@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Lessons
 {
@@ -15,7 +16,7 @@ namespace Lessons
     {
         public static string SAVE_PATH;
         public const string FILE_EXTANSIONS_TXT = ".txt";
-
+        public const string TasksPath = "../../../Files";
         public static T GetData<T>(string name, string path = null, string extension = FILE_EXTANSIONS_TXT)
         {
             var type = typeof(T);
@@ -90,6 +91,36 @@ namespace Lessons
             }
 
             return filePath + "\\AgeCalculation\\bin\\Debug\\";
+        }
+
+        public static void SetXmlWinFormSettings(string settings)
+        {
+            if (!Directory.Exists(TasksPath))
+            {
+                Directory.CreateDirectory(TasksPath);
+            }
+            string filePath = $"{TasksPath}/Settings.xml";
+            if (!File.Exists(filePath))
+            {
+                File.WriteAllText(filePath, "");
+            }
+            
+            XmlDocument xmlDoc = new XmlDocument();
+
+            XmlElement root = xmlDoc.CreateElement("Settings");
+            xmlDoc.AppendChild(root);
+
+            XmlElement contact = xmlDoc.CreateElement("Name");
+            contact.InnerText = settings;
+
+            root.AppendChild(contact);
+
+            xmlDoc.Save(filePath);
+        }
+
+        public static void GetXmlWinFormSettings()
+        {
+
         }
     }
 }
