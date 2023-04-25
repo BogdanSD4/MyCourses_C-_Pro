@@ -10,6 +10,7 @@ namespace Lessons
         static int[] space = new int[] { };
         public static string emptyString = "                                                    ";
         public static string alphabet = "abcdefghijklmnopqrstuvwxyz";
+        public static string numbers = "0123456789";
         public static string someText 
         { 
             get 
